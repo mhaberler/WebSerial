@@ -55,7 +55,7 @@ size_t WebSerialClass::write(const uint8_t* buffer, size_t size) {
 
 #if defined(WEBSERIAL_DEBUG)
     void WebSerialClass::DEBUG_WEB_SERIAL(const char* message){
-        Serial.println("[WebSerial] "+message);
+  Serial.printf("[WebSerial] %s\n", message);
     }
 #endif
 
