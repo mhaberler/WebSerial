@@ -44,13 +44,13 @@ void WebSerialClass::msgCallback(RecvMsgHandler _recv) { _RecvFunc = _recv; }
 
 // Print
 size_t WebSerialClass::write(uint8_t m) {
-  if (_ws)
+  if (_ws && _ws->count())
     _ws->textAll((const char *)&(m), 1);
   return (1);
 }
 
 size_t WebSerialClass::write(const uint8_t *buffer, size_t size) {
-  if (_ws)
+  if (_ws && _ws->count())
     _ws->textAll((const char *)buffer, size);
   return (size);
 }
