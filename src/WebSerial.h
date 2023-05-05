@@ -2,20 +2,19 @@
 #define WebSerial_h
 
 #include "Arduino.h"
-#include "Ticker.h"
 #include "stdlib_noniso.h"
 #include <functional>
 
 #if defined(ESP8266)
-    #define HARDWARE "ESP8266"
-    #include "ESP8266WiFi.h"
-    #include "ESPAsyncTCP.h"
-    #include "ESPAsyncWebServer.h"
+#define HARDWARE "ESP8266"
+#include "ESP8266WiFi.h"
+#include "ESPAsyncTCP.h"
+#include "ESPAsyncWebServer.h"
 #elif defined(ESP32)
-    #define HARDWARE "ESP32"
-    #include "WiFi.h"
-    #include "AsyncTCP.h"
-    #include "ESPAsyncWebServer.h"
+#define HARDWARE "ESP32"
+#include "AsyncTCP.h"
+#include "ESPAsyncWebServer.h"
+#include "WiFi.h"
 #endif
 
 #include "webserial_webpage.h"
@@ -28,25 +27,25 @@ typedef std::function<void(uint8_t *data, size_t len)> RecvMsgHandler;
 class WebSerialClass : public Stream {
 
 public:
-    void begin(AsyncWebServer *server, const char* url = "/webserial");
+  void begin(AsyncWebServer *server, const char *url = "/webserial");
 
-    void msgCallback(RecvMsgHandler _recv);
+  void msgCallback(RecvMsgHandler _recv);
 
-    // Print
+  // Print
 
-    size_t write(uint8_t);
-    size_t write(const uint8_t* buffer, size_t size);
-    int available() { return 0; };
-    int read() { return 0; };
-    int peek() { return 0; };
+  size_t write(uint8_t);
+  size_t write(const uint8_t *buffer, size_t size);
+  int available() { return 0; };
+  int read() { return 0; };
+  int peek() { return 0; };
 
-  private:
-    AsyncWebServer *_server;
-    AsyncWebSocket *_ws;
-    RecvMsgHandler _RecvFunc = NULL;
+private:
+  AsyncWebServer *_server;
+  AsyncWebSocket *_ws;
+  RecvMsgHandler _RecvFunc = NULL;
 
 #if defined(WEBSERIAL_DEBUG)
-    void DEBUG_WEB_SERIAL(const char *message);
+  void DEBUG_WEB_SERIAL(const char *message);
 #endif
 };
 
